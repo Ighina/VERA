@@ -1,0 +1,12 @@
+# VERA — Verification Dataset Generator from Peer-Review Data
+
+# Data handling
+pyyaml>=6.0
+pandas>=2.0
+
+# LLM Providers
+openai>=1.0
+anthropic>=0.50
+google-genai>=1.0
+
+# (datasets / huggingface_hub already installed if pulling from HF)

@@ -1,0 +1,98 @@
+# Error taxonomy for peer review verification
+# This is a placeholder — develop and refine as needed.
+#
+# Each category has:
+#   name:        short human-readable label
+#   description: what this error class covers
+#   examples:    illustrative instances (optional)
+
+taxonomy:
+  - id: material_and_data_error
+    name: Material and Data Error
+    description: >
+      Errors occurring at the foundational level of the datasets, pre-trained models, or environments used. This includes using contaminated data, deprecated dataset versions, or flawed foundational models that invalidate downstream tasks.
+    examples:
+      - "Data contamination where test set examples leak into the training data"
+      - "Using a deprecated, unmaintained, or fundamentally flawed dataset version without disclosure"
+      - "Applying pre-trained weights that were exposed to the target evaluation data"
+
+  - id: observational_and_annotation_error
+    name: Observational and Annotation Error
+    description: >
+      Errors made during the data collection, labeling, or annotation process, leading to flawed ground-truth targets or systematically biased training signals.
+    examples:
+      - "High variance or systematic bias in crowdsourced human annotations"
+      - "Incorrect automated labeling pipelines that introduce systemic noise"
+      - "Using proxy metrics for human preference that do not actually correlate with human judgment"
+
+  - id: evidence_manipulation
+    name: Evidence Manipulation
+    description: >
+      Incorrect or misleading use of empirical evidence, including fabricating results, hacking metrics, or selective reporting to artificially inflate performance claims.
+    examples:
+      - "Cherry-picking the best random seed while hiding high variance across runs"
+      - "Silently modifying standard evaluation scripts (e.g., BLEU or ROUGE) to yield higher scores"
+      - "Reporting performance on a validation set and treating it as the unseen test set"
+
+  - id: method_logic_errors
+    name: Method Logic Errors
+    description: >
+      Logical inconsistencies, mathematical flaws, or invalid reasoning in the algorithm design, loss function formulation, or theoretical proofs.
+    examples:
+      - "Data leakage occurring during preprocessing (e.g., normalizing using global dataset statistics before splitting)"
+      - "Flawed mathematical derivations in a newly proposed loss function or optimization bound"
+      - "Unacknowledged numerical instability (e.g., dividing by zero or gradient explosion) in the proposed architecture"
+
+  - id: experiment_protocol_flaws
+    name: Experiment Protocol Flaws
+    description: >
+      Errors in the experimental design or evaluation protocols, particularly concerning fairness of comparison, computational parity, and the isolation of architectural contributions.
+    examples:
+      - "Comparing a heavily tuned proposed model against un-tuned, weak baselines"
+      - "Allocating vastly different computational budgets (e.g., more training steps or larger batch sizes) to the proposed method versus baselines"
+      - "Missing ablation studies for a complex pipeline, making it impossible to know which component actually drives the performance gain"
+
+  - id: claim_distortion
+    name: Claim Distortion
+    description: >
+      Overstated or unsupported interpretations of experimental results, such as unwarranted claims of generalization, causal inference from observational models, or anthropomorphizing AI capabilities.
+    examples:
+      - "Claiming universal 'state-of-the-art' or 'generalization' based on evaluation on a single, narrow dataset"
+      - "Using causal language (e.g., 'the model learns to reason') when only correlational pattern matching is demonstrated"
+      - "Asserting that a model possesses human-like understanding or zero-shot capabilities that fail under trivial adversarial perturbations"
+
+  - id: context_misalignment
+    name: Context Misalignment
+    description: >
+      Inconsistencies across different artifacts of the research, most notably mismatches between the claims in the paper's text and the actual implementation in the open-sourced code or appendices.
+    examples:
+      - "The paper claims a simple architecture, but the released code reveals undocumented, complex heuristics and tricks required for performance"
+      - "Hyperparameters reported in the main text contradict the default configurations in the provided repository"
+      - "Abstract claims a model is 'lightweight' or 'efficient,' but the results table reveals massive latency or parameter counts compared to standard models"
+
+  - id: reference_fabrication
+    name: Reference Fabrication
+    description: >
+      Incorrect, misleading, or hallucinated citations. This includes misrepresenting the methodologies of prior work to artificially boost the perceived novelty of the proposed method.
+    examples:
+      - "Falsely claiming a specific technique has never been explored, despite existing literature (omission of prior art)"
+      - "Citing a paper to support a theoretical guarantee that the cited paper does not actually provide"
+      - "Including hallucinated or non-existent citations generated by large language models during the writing process"
+
+  - id: ethical_omission
+    name: Ethical Omission
+    description: >
+      Omission or incomplete disclosure of ethical considerations critical to modern AI research, such as environmental impact, demographic biases, and dual-use risks.
+    examples:
+      - "Failing to disclose the massive computational cost and carbon footprint required to train a foundation model"
+      - "Ignoring or failing to audit severe demographic, racial, or gender biases present in a newly released dataset"
+      - "Releasing a powerful generative model without discussing potential dual-use risks (e.g., deepfakes, misinformation generation)"
+
+  - id: rhetoric_bias
+    name: Rhetoric Bias
+    description: >
+      Misleading rhetorical strategies that exaggerate novelty or rely on hype, utilizing marketing terminology rather than precise scientific language.
+    examples:
+      - "Using unqualified superlatives or buzzwords like 'revolutionary,' 'AGI,' or 'conscious' without rigorous operationalization"
+      - "Rebranding existing, well-known statistical techniques with new, flashy neural-network terminology to artificially manufacture novelty"
+      - "Biased phrasing designed to obscure the limitations, high latency, or massive memory requirements of the proposed approach"
